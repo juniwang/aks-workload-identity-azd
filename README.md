@@ -1,0 +1,1 @@
+# aks-workload-identity-azd
