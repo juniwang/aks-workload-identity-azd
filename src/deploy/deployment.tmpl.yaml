@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+        azure.workload.identity/use: 'true'
+    spec:
+      serviceAccountName: myapp
+      containers:
+        - name: myapp-frontend
+          image: {{.Env.SERVICE_APP_IMAGE_NAME}}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: StoreEndpoint
+              value: {{.Env.AZURE_APP_CONFIG_ENDPOINT}}

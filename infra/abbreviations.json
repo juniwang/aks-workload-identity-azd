@@ -1,0 +1,8 @@
+{
+    "containerRegistry": "acr",
+    "containerServiceManagedClusters": "aks-",
+    "federatedIdentityCredentials": "fic-",
+    "appConfigStore": "appc-",
+    "managedIdentityUserAssignedIdentities": "mi-",
+    "resourcesResourceGroups": "juniwang-rg-azd-"
+}

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+name: test-app # change with your app name
+metadata:
+    template: aks-app-template@0.0.1-beta
+hooks:
+    predeploy:
+        interactive: false
+        windows:
+            shell: pwsh
+            run: infra/azd-hooks/predeploy.ps1 # installs additional components on the cluster
+        posix:
+            shell: sh
+            run: chmod +x infra/azd-hooks/predeploy.sh && infra/azd-hooks/predeploy.sh # installs additional components on the cluster     
+infra:
+    provider: bicep
+    path: infra
+    module: main
+services:
+    app:
+        project: ./src/app
+        language: dotnet
+        host: aks
+        k8s:
+            namespace:
+            deploymentPath: ../deploy
+        docker:
+            path: ./Dockerfile

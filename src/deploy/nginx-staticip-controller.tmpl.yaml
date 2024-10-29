@@ -1,0 +1,10 @@
+apiVersion: approuting.kubernetes.azure.com/v1alpha1
+kind: NginxIngressController
+metadata:
+  name: my-nginx-static
+spec:
+  ingressClassName: my-nginx-static
+  controllerNamePrefix: my-nginx-static
+  loadBalancerAnnotations: 
+    service.beta.kubernetes.io/azure-pip-name: {{.Env.AZURE_STATIC_IP_NAME}}
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: {{.Env.AZURE_RESOURCE_GROUP}}
